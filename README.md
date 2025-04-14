@@ -1,168 +1,198 @@
-# 🎭 Playwright
+<h1 align="center">
+    🎭 Patchright NodeJS
+</h1>
 
-[![npm version](https://img.shields.io/npm/v/playwright.svg)](https://www.npmjs.com/package/playwright) <!-- GEN:chromium-version-badge -->[![Chromium version](https://img.shields.io/badge/chromium-134.0.6998.35-blue.svg?logo=google-chrome)](https://www.chromium.org/Home)<!-- GEN:stop --> <!-- GEN:firefox-version-badge -->[![Firefox version](https://img.shields.io/badge/firefox-135.0-blue.svg?logo=firefoxbrowser)](https://www.mozilla.org/en-US/firefox/new/)<!-- GEN:stop --> <!-- GEN:webkit-version-badge -->[![WebKit version](https://img.shields.io/badge/webkit-18.4-blue.svg?logo=safari)](https://webkit.org/)<!-- GEN:stop --> [![Join Discord](https://img.shields.io/badge/join-discord-infomational)](https://aka.ms/playwright/discord)
 
-## [Documentation](https://playwright.dev) | [API reference](https://playwright.dev/docs/api/class-playwright)
+<p align="center">
+    <a href="https://github.com/Kaliiiiiiiiii-Vinyzu/patchright-nodejs/blob/main/LICENSE">
+        <img src="https://img.shields.io/badge/License-Apache%202.0-green">
+    </a>
+    <a>
+        <img src="https://img.shields.io/badge/Based%20on-Playwright-goldenrod">
+    </a>
+    <a>
+        <img src="https://img.shields.io/badge/Driver-Patched-blue">
+    </a>
+    <a href="https://github.com/Kaliiiiiiiiii-Vinyzu/patchright-nodejs/releases/latest">
+        <img alt="Patchright Version" src="https://img.shields.io/github/v/release/microsoft/playwright?display_name=release&label=Version">
+    </a>
+    <a href="https://github.com/Kaliiiiiiiiii-Vinyzu/patchright-nodejs/releases">
+        <img alt="GitHub Downloads (all assets, all releases)" src="https://img.shields.io/npm/d18m/patchright?color=red">
+    </a>
+    <a href="https://github.com/Kaliiiiiiiiii-Vinyzu/patchright-nodejs">
+        <img src="https://img.shields.io/badge/Package-NodeJS-seagreen">
+    </a>
+</p>
 
-Playwright is a framework for Web Testing and Automation. It allows testing [Chromium](https://www.chromium.org/Home), [Firefox](https://www.mozilla.org/en-US/firefox/new/) and [WebKit](https://webkit.org/) with a single API. Playwright is built to enable cross-browser web automation that is **ever-green**, **capable**, **reliable** and **fast**.
+#### Patchright is a patched and undetected version of the Playwright Testing and Automation Framework. </br> It can be used as a drop-in replacement for Playwright.
 
-|          | Linux | macOS | Windows |
-|   :---   | :---: | :---: | :---:   |
-| Chromium <!-- GEN:chromium-version -->134.0.6998.35<!-- GEN:stop --> | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| WebKit <!-- GEN:webkit-version -->18.4<!-- GEN:stop --> | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Firefox <!-- GEN:firefox-version -->135.0<!-- GEN:stop --> | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+> [!NOTE]  
+> This repository serves the Patchright-NodeJS Package. To use Patchright with Python, check out the [Python Package](https://github.com/Kaliiiiiiiiii-Vinyzu/patchright-python).
+> Also check out the main [Patchright Driver Repository](https://github.com/Kaliiiiiiiiii-Vinyzu/patchright)
 
-Headless execution is supported for all browsers on all platforms. Check out [system requirements](https://playwright.dev/docs/intro#system-requirements) for details.
+---
 
-Looking for Playwright for [Python](https://playwright.dev/python/docs/intro), [.NET](https://playwright.dev/dotnet/docs/intro), or [Java](https://playwright.dev/java/docs/intro)?
+## Install it from NPM
 
-## Installation
-
-Playwright has its own test runner for end-to-end tests, we call it Playwright Test.
-
-### Using init command
-
-The easiest way to get started with Playwright Test is to run the init command.
-
-```Shell
-# Run from your project's root directory
-npm init playwright@latest
-# Or create a new project
-npm init playwright@latest new-project
+```bash
+# Install Patchright from NPM
+npm i patchright
 ```
 
-This will create a configuration file, optionally add examples, a GitHub Action workflow and a first test example.spec.ts. You can now jump directly to writing assertions section.
-
-### Manually
-
-Add dependency and install browsers.
-
-```Shell
-npm i -D @playwright/test
-# install supported browsers
-npx playwright install
+```bash
+# Install Chromium-Driver for Patchright
+npx patchright install chromium
 ```
 
-You can optionally install only selected browsers, see [install browsers](https://playwright.dev/docs/cli#install-browsers) for more details. Or you can install no browsers at all and use existing [browser channels](https://playwright.dev/docs/browsers).
+---
 
-* [Getting started](https://playwright.dev/docs/intro)
-* [API reference](https://playwright.dev/docs/api/class-playwright)
+## Usage
+#### Just change the import and use it like playwright. Patchright is a drop-in-replacement for Playwright!
 
-## Capabilities
+> [!WARNING]  
+> Patchright only patches CHROMIUM based browsers. Firefox and Webkit are not supported.
 
-### Resilient • No flaky tests
+```js
+// patchright here!
+const { chromium } = require('patchright');
 
-**Auto-wait**. Playwright waits for elements to be actionable prior to performing actions. It also has a rich set of introspection events. The combination of the two eliminates the need for artificial timeouts - a primary cause of flaky tests.
+(async () => {
+  const browser = await chromium.launch();
+  const page = await browser.newPage();
+  await page.goto('http://example.com');
+  // other actions...
+  await browser.close();
+})();
+```
 
-**Web-first assertions**. Playwright assertions are created specifically for the dynamic web. Checks are automatically retried until the necessary conditions are met.
+### Best Practice  - use Chrome without Fingerprint Injection
 
-**Tracing**. Configure test retry strategy, capture execution trace, videos and screenshots to eliminate flakes.
-
-### No trade-offs • No limits
-
-Browsers run web content belonging to different origins in different processes. Playwright is aligned with the architecture of the modern browsers and runs tests out-of-process. This makes Playwright free of the typical in-process test runner limitations.
-
-**Multiple everything**. Test scenarios that span multiple tabs, multiple origins and multiple users. Create scenarios with different contexts for different users and run them against your server, all in one test.
-
-**Trusted events**. Hover elements, interact with dynamic controls and produce trusted events. Playwright uses real browser input pipeline indistinguishable from the real user.
-
-Test frames, pierce Shadow DOM. Playwright selectors pierce shadow DOM and allow entering frames seamlessly.
-
-### Full isolation • Fast execution
-
-**Browser contexts**. Playwright creates a browser context for each test. Browser context is equivalent to a brand new browser profile. This delivers full test isolation with zero overhead. Creating a new browser context only takes a handful of milliseconds.
-
-**Log in once**. Save the authentication state of the context and reuse it in all the tests. This bypasses repetitive log-in operations in each test, yet delivers full isolation of independent tests.
-
-### Powerful Tooling
-
-**[Codegen](https://playwright.dev/docs/codegen)**. Generate tests by recording your actions. Save them into any language.
-
-**[Playwright inspector](https://playwright.dev/docs/inspector)**. Inspect page, generate selectors, step through the test execution, see click points and explore execution logs.
-
-**[Trace Viewer](https://playwright.dev/docs/trace-viewer)**. Capture all the information to investigate the test failure. Playwright trace contains test execution screencast, live DOM snapshots, action explorer, test source and many more.
-
-Looking for Playwright for [TypeScript](https://playwright.dev/docs/intro), [JavaScript](https://playwright.dev/docs/intro), [Python](https://playwright.dev/python/docs/intro), [.NET](https://playwright.dev/dotnet/docs/intro), or [Java](https://playwright.dev/java/docs/intro)?
-
-## Examples
-
-To learn how to run these Playwright Test examples, check out our [getting started docs](https://playwright.dev/docs/intro).
-
-#### Page screenshot
-
-This code snippet navigates to Playwright homepage and saves a screenshot.
-
-```TypeScript
-import { test } from '@playwright/test';
-
-test('Page Screenshot', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
-  await page.screenshot({ path: `example.png` });
+To be completely undetected, use the following configuration:
+```js
+chromium.launchPersistentContext("...", {
+    channel: "chrome",
+    headless: false,
+    viewport: null,
+    // do NOT add custom browser headers or userAgent
 });
 ```
 
-#### Mobile and geolocation
+> [!NOTE]  
+> We recommend using Google Chrome instead of Chromium.
+> You can install it via `npx patchright install chrome` (or via any other installation method) and use it with `channel: "chrome"`.
 
-This snippet emulates Mobile Safari on a device at given geolocation, navigates to maps.google.com, performs the action and takes a screenshot.
 
-```TypeScript
-import { test, devices } from '@playwright/test';
+---
 
-test.use({
-  ...devices['iPhone 13 Pro'],
-  locale: 'en-US',
-  geolocation: { longitude: 12.492507, latitude: 41.889938 },
-  permissions: ['geolocation'],
-})
+## Patches
 
-test('Mobile and geolocation', async ({ page }) => {
-  await page.goto('https://maps.google.com');
-  await page.getByText('Your location').click();
-  await page.waitForRequest(/.*preview\/pwa/);
-  await page.screenshot({ path: 'colosseum-iphone.png' });
-});
+### [Runtime.enable](https://vanilla.aslushnikov.com/?Runtime.enable) Leak
+This is the biggest Patch Patchright uses. To avoid detection by this leak, patchright avoids using [Runtime.enable](https://vanilla.aslushnikov.com/?Runtime.enable) by executing Javascript in (isolated) ExecutionContexts.
+
+### [Console.enable](https://vanilla.aslushnikov.com/?Console.enable) Leak
+Patchright patches this leak by disabling the Console API all together. This means, console functionality will not work in Patchright. If you really need the console, you might be better off using Javascript loggers, although they also can be easily detected.
+
+### Command Flags Leaks
+Patchright tweaks the Playwright Default Args to avoid detection by Command Flag Leaks. This (most importantly) affects:
+- `--disable-blink-features=AutomationControlled` (added) to avoid navigator.webdriver detection.
+- `--enable-automation` (removed) to avoid navigator.webdriver detection.
+- `--disable-popup-blocking` (removed) to avoid popup crashing.
+- `--disable-component-update` (removed) to avoid detection as a Stealth Driver.
+- `--disable-default-apps` (removed) to enable default apps.
+- `--disable-extensions` (removed) to enable extensions
+
+### General Leaks
+Patchright patches some general leaks in the Playwright codebase. This mainly includes poor setups and obvious detection points.
+
+---
+
+## Stealth
+
+With the right setup, Patchright currently is considered undetectable.
+Patchright passes:
+- [Brotector](https://kaliiiiiiiiii.github.io/brotector/) ✅ (with [CDP-Patches](https://github.com/Kaliiiiiiiiii-Vinyzu/CDP-Patches/))
+- [Cloudflare](https://cloudflare.com/) ✅
+- [Kasada](https://www.kasada.io/) ✅
+- [Akamai](https://www.akamai.com/products/bot-manager/) ✅
+- [Shape/F5](https://www.f5.com/) ✅
+- [Bet365](https://bet365.com/) ✅
+- [Datadome](https://datadome.co/products/bot-protection/) ✅
+- [Fingerprint.com](https://fingerprint.com/products/bot-detection/) ✅
+- [CreepJS](https://abrahamjuliot.github.io/creepjs/) ✅
+- [Sannysoft](https://bot.sannysoft.com/) ✅
+- [Incolumitas](https://bot.incolumitas.com/) ✅
+- [IPHey](https://iphey.com/) ✅
+- [Browserscan](https://browserscan.net/) ✅
+- [Pixelscan](https://pixelscan.net/) ✅
+
+---
+
+## Documentation and API Reference
+See the original [Playwright Documentation](https://playwright.dev/docs/intro) and [API Reference](https://playwright.dev/docs/api/class-playwright)
+
+## Extended Patchright API
+#### **`evaluate`** Method <sub>([`Frame.evaluate`](https://playwright.dev/docs/api/class-frame#frame-evaluate), [`Page.evaluate`](https://playwright.dev/docs/api/class-page#page-evaluate),  [`Locator.evaluate`](https://playwright.dev/docs/api/class-locator#locator-evaluate),  [`Worker.evaluate`](https://playwright.dev/docs/api/class-worker#worker-evaluate))</sub>
+- Added `isolatedContext`  to choose Execution Context (Main/Isolated). `Bool` (*optional*, Defaults to `true`)
+```diff
+object.evaluate(
+    pageFunction: Function | string,
+    arg?: Arg,
+    ...,
++   isolatedContext: boolean = true
+)
 ```
 
-#### Evaluate in browser context
-
-This code snippet navigates to example.com, and executes a script in the page context.
-
-```TypeScript
-import { test } from '@playwright/test';
-
-test('Evaluate in browser context', async ({ page }) => {
-  await page.goto('https://www.example.com/');
-  const dimensions = await page.evaluate(() => {
-    return {
-      width: document.documentElement.clientWidth,
-      height: document.documentElement.clientHeight,
-      deviceScaleFactor: window.devicePixelRatio
-    }
-  });
-  console.log(dimensions);
-});
+#### **`evaluateHandle`** Method <sub>([`Frame.evaluateHandle`](https://playwright.dev/docs/api/class-frame#frame-evaluate-handle), [`Page.evaluateHandle`](https://playwright.dev/docs/api/class-page#page-evaluate-handle), [`Locator.evaluateHandle`](https://playwright.dev/docs/api/class-locator#locator-evaluate-handle), [`Worker.evaluateHandle`](https://playwright.dev/docs/api/class-worker#worker-evaluate-handle))</sub>
+- Added `isolatedContext`  to choose Execution Context (Main/Isolated). `Bool` (*optional*, Defaults to `true`)
+```diff
+object.evaluateHandle(
+    pageFunction: Function | string,
+    arg?: Arg,
+    ...,
++   isolatedContext: boolean = true
+)
 ```
 
-#### Intercept network requests
+---
 
-This code snippet sets up request routing for a page to log all network requests.
+## Bugs
+#### The bugs are documented in the [Patchright Driver Repository](https://github.com/Kaliiiiiiiiii-Vinyzu/patchright#bugs).
 
-```TypeScript
-import { test } from '@playwright/test';
+---
 
-test('Intercept network requests', async ({ page }) => {
-  // Log and continue all network requests
-  await page.route('**', route => {
-    console.log(route.request().url());
-    route.continue();
-  });
-  await page.goto('http://todomvc.com');
-});
-```
+### TODO
+#### The TODO is documented in the [Patchright Driver Repository](https://github.com/Kaliiiiiiiiii-Vinyzu/patchright#todo).
 
-## Resources
 
-* [Documentation](https://playwright.dev)
-* [API reference](https://playwright.dev/docs/api/class-playwright/)
-* [Contribution guide](CONTRIBUTING.md)
-* [Changelog](https://github.com/microsoft/playwright/releases)
+---
+
+## Development
+
+Deployment of new Patchright versions are automatic, but bugs due to Playwright codebase changes may occur. Fixes for these bugs might take a few days to be released. 
+
+---
+
+## Support our work
+
+If you choose to support our work, please contact [@vinyzu](https://discord.com/users/935224495126487150) or [@steve_abcdef](https://discord.com/users/936292409426477066) on Discord.
+
+---
+
+## Copyright and License
+© [Vinyzu](https://github.com/Vinyzu/)
+
+Patchright is licensed [Apache 2.0](https://choosealicense.com/licenses/apache-2.0/)
+
+---
+
+## Disclaimer
+
+This repository is provided for **educational purposes only**. \
+No warranties are provided regarding accuracy, completeness, or suitability for any purpose. **Use at your own risk**—the authors and maintainers assume **no liability** for **any damages**, **legal issues**, or **warranty breaches** resulting from use, modification, or distribution of this code.\
+**Any misuse or legal violations are the sole responsibility of the user**. 
+
+---
+
+## Authors
+
+#### Active Maintainer: [Vinyzu](https://github.com/Vinyzu/) </br> Co-Maintainer: [Kaliiiiiiiiii](https://github.com/kaliiiiiiiiii/)
