@@ -1,3 +1,3 @@
-# playwright-core
+# patchright-core
 
-This package contains the no-browser flavor of [Playwright](http://github.com/microsoft/playwright).
+This package contains the no-browser flavor of [Patchright-NodeJS](https://github.com/Kaliiiiiiiiii-Vinyzu/patchright-nodejs).
